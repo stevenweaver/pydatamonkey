@@ -1,4 +1,4 @@
 pydatamonkey
 ============
 
-Python wrapper for Datamonkey API'
+Python wrapper for Datamonkey API

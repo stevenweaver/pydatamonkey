@@ -1,0 +1,10 @@
+Metadata-Version: 1.0
+Name: pydatamonkey
+Version: 0.1
+Summary: Python wrapper for Datamonkey API
+Home-page: http://github.com/veg/pydatamonkey
+Author: Steven Weaver
+Author-email: sweaver@ucsd.edu
+License: UNKNOWN
+Description: UNKNOWN
+Platform: UNKNOWN

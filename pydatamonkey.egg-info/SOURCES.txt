@@ -1,0 +1,10 @@
+setup.py
+datamonkey/__init__.py
+datamonkey/analysis.py
+datamonkey/dm.py
+datamonkey/msa.py
+pydatamonkey.egg-info/PKG-INFO
+pydatamonkey.egg-info/SOURCES.txt
+pydatamonkey.egg-info/dependency_links.txt
+pydatamonkey.egg-info/not-zip-safe
+pydatamonkey.egg-info/top_level.txt

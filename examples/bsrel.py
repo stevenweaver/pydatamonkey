@@ -33,19 +33,17 @@ fn   = './res/HIV_gp120.nex'
 
 msa_obj = msa.upload_file(fn, 0, 0, mail)
 
-meme_params = {
+bsrel_params = {
     'treemode'    : 0,
-    'modelstring' : '010010',
-    'pvalue'      : 0.1,
-    'sendmail'    : True
 }
 
 # Create a new analysis and poll
-meme_analysis = analysis.create_analysis(msa_obj.id, 'meme', meme_params)
-meme_analysis.poll()
-print meme_analysis.json
+bsrel_analysis = analysis.create_analysis(msa_obj.id, 'bsrel', bsrel_params)
+bsrel_analysis.poll()
+print bsrel_analysis.json
 
 ## Get an existing analysis and print results
-#meme_analysis = analysis.get_by_id(1, 'upload.958520133127023.1', 'meme' )
-#results = meme_analysis.json['memeresults']
+#bsrel_analysis = analysis.get_by_id(1, 'upload.958520133127023.1', 'bsrel' )
+#results = bsrel_analysis.json['bsrelresults']
 #print len(results)
+

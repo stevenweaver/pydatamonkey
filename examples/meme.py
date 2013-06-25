@@ -24,7 +24,6 @@
 #  TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE
 #  SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
-import sys
 import datamonkey.msa as msa
 import datamonkey.analysis as analysis
 import time
@@ -41,9 +40,13 @@ meme_params = {
     'sendmail'    : True
 }
 
-meme_analysis = analysis.create_analysis(msa_obj.id, 'meme', meme_params)
-print meme_analysis.msaid
-meme_analysis.poll()
-print meme_analysis
+## Create a new analysis and poll
+#meme_analysis = analysis.create_analysis(msa_obj.id, 'meme', meme_params)
+#meme_analysis.poll()
+#print meme_analysis.json
 
-
+## Get an existing analysis and print results
+#meme_analysis = analysis.get_by_id(1, 'upload.901470187622877.1', 'meme' )
+#print meme_analysis.json['memesummary']
+#print meme_analysis.json['mememappings']
+#print meme_analysis.json['memeresults']

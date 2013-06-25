@@ -28,7 +28,7 @@ import urllib
 import requests
 
 #TODO: Change prints to logger
-URL="http://datamonkey-dev:3000"
+URL='http://datamonkey-dev:3000'
 
 #A Generic API POST call
 def post(method, params={}):

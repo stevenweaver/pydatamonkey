@@ -57,20 +57,35 @@ def delete(id, msaid, type):
 
 #Replace all the python files with single analysis python script
 class Analysis:
-    def __init__(self, analysis):
+    def __init__(self, json):
         u""" Starts a new asr for the given sequence."""
-        self.id       = analysis.get("id")
-        self.type     = analysis.get("type")
-        self.msaid    = analysis.get("msaid")
-        self.status   = analysis.get("status")
-        self.sendmail = analysis.get("sendmail")
+        self.json = json
+        self.update(json)
+
+    def update(self, json):
+        u""" Starts a new asr for the given sequence."""
+        self.json     = json
+        self.id       = json.get("id")
+        self.type     = json.get("type")
+        self.msaid    = json.get("msaid")
+        self.status   = json.get("status")
+        self.sendmail = json.get("sendmail")
 
     def poll(self):
         while 1:
             time.sleep(5)
             self.get_status()
             if self.status != "queueing" and self.status != "running":
+                self.update_with_latest()
                 return
+
+    def update_with_latest(self):
+        u""" Returns current status of job """
+        method = '/msa/{0}/{1}/{2}'.format(self.msaid, self.type,
+                                                  self.id)
+        json = dm.get(method, params=None)
+        self.update(json)
+
 
     def get_status(self):
         u""" Returns current status of job """
@@ -79,4 +94,3 @@ class Analysis:
         response = dm.get(method, params=None)
         self.status = response.get('status')
         return response.get('status')
-

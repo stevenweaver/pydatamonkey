@@ -36,9 +36,9 @@ def post(method, params={}):
     if "files" in params.keys():
         files = params["files"]
         del params["files"]
-        r = requests.post(url, files, params=params)
+        r = requests.post(url, files=files, data=params)
     else:
-        r = requests.post(url, params=params)
+        r = requests.post(url, params)
     if r.status_code != 200:
       print r.text
       r.raise_for_status()
@@ -46,7 +46,7 @@ def post(method, params={}):
 
 def get(method, params={}):
     url = URL + method
-    r = requests.get(url, params=params)
+    r = requests.get(url, data=params)
     if r.status_code != 200:
       print r.text
       r.raise_for_status()
@@ -54,7 +54,7 @@ def get(method, params={}):
 
 def put(method, params={}):
     url = URL + method
-    r = requests.put(url, params=params)
+    r = requests.put(url, data=params)
     if r.status_code != 200:
       print r.text
       r.raise_for_status()
@@ -62,7 +62,7 @@ def put(method, params={}):
 
 def delete(method, params={}):
     url = URL + method
-    r = requests.delete(url, params=params)
+    r = requests.delete(url, data=params)
     if r.status_code != 200:
       print r.text
       r.raise_for_status()

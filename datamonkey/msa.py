@@ -76,10 +76,10 @@ def delete(id):
 class MSA:
     def __init__(self, msa):
         u""" Initializes Multiple Sequence Alignment """
-        self.id         = msa.get('msaid')
+        self.id         = msa.get('upload_id')
         self.gencodeid  = msa.get('gencodeid')
         self.datatype   = msa.get('datatype')
-        self.msaid      = msa.get('msaid')
+        self.upload_id      = msa.get('upload_id')
         self.partitions = msa.get('partitions')
         self.sites      = msa.get('sites')
         self.rawsites   = msa.get('rawsites')

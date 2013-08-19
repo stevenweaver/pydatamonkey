@@ -29,28 +29,28 @@ import datamonkey.dm as dm
 import datamonkey.msa as msa
 import time
 
-def create_analysis(msaid, type, params):
+def create_analysis(upload_id, type, params):
     u""" Starts a new analysis for the given file. """
     # We need to have an option of whether they want mail
     # and/or want the call to block until finished, or neither
-    method = '/msa/{0}/{1}'.format(msaid, type)
-    params["msaid"] = msaid
+    method = '/msa/{0}/{1}'.format(upload_id, type)
+    params["upload_id"] = upload_id
     json = dm.post(method, params)
     return Analysis(json)
 
-def get_by_id(id, msaid, type):
+def get_by_id(id, upload_id, type):
     u""" Starts a new analysis for the given file. """
     # We need to have an option of whether they want mail
     # and/or want the call to block until finished, or neither
-    method = '/msa/{0}/{1}/{2}'.format(msaid, type, id)
+    method = '/msa/{0}/{1}/{2}'.format(upload_id, type, id)
     json = dm.get(method)
     return Analysis(json)
 
-def delete(id, msaid, type):
+def delete(id, upload_id, type):
     u""" Starts a new analysis for the given file. """
     # We need to have an option of whether they want mail
     # and/or want the call to block until finished, or neither
-    method = '/msa/{0}/{1}/{2}'.format(msaid, type, id)
+    method = '/msa/{0}/{1}/{2}'.format(upload_id, type, id)
     json = dm.delete(method)
     return json
 
@@ -67,7 +67,7 @@ class Analysis:
         self.json     = json
         self.id       = json.get("id")
         self.type     = json.get("type")
-        self.msaid    = json.get("msaid")
+        self.upload_id    = json.get("upload_id")
         self.status   = json.get("status")
         self.sendmail = json.get("sendmail")
 
@@ -81,7 +81,7 @@ class Analysis:
 
     def update_with_latest(self):
         u""" Returns current status of job """
-        method = '/msa/{0}/{1}/{2}'.format(self.msaid, self.type,
+        method = '/msa/{0}/{1}/{2}'.format(self.upload_id, self.type,
                                                   self.id)
         json = dm.get(method, params=None)
         self.update(json)
@@ -89,8 +89,9 @@ class Analysis:
 
     def get_status(self):
         u""" Returns current status of job """
-        method = '/msa/{0}/{1}/{2}/status'.format(self.msaid, self.type,
+        method = '/msa/{0}/{1}/{2}/status'.format(self.upload_id, self.type,
                                                   self.id)
         response = dm.get(method, params=None)
         self.status = response.get('status')
         return response.get('status')
+

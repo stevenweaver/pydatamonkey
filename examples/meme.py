@@ -31,7 +31,7 @@ import time
 mail = 'sweaver@ucsd.edu'
 fn   = './res/HIV_gp120.nex'
 
-msa_obj = msa.upload_file(fn, 0, 0, mail)
+#msa_obj = msa.upload_file(fn, 0, 0, mail)
 
 meme_params = {
     'treemode'    : 0,
@@ -41,11 +41,13 @@ meme_params = {
 }
 
 # Create a new analysis and poll
-meme_analysis = analysis.create_analysis(msa_obj.id, 'meme', meme_params)
-meme_analysis.poll()
+meme_analysis = analysis.create_analysis('upload.146437568627481.1', 'meme', meme_params)
+print meme_analysis
+#meme_analysis.poll()
 print meme_analysis.json
 
 ## Get an existing analysis and print results
-#meme_analysis = analysis.get_by_id(1, 'upload.958520133127023.1', 'meme' )
+#meme_analysis = analysis.get_by_id(1, 'upload.45114038285438.1', 'meme' )
 #results = meme_analysis.json['memeresults']
 #print len(results)
+

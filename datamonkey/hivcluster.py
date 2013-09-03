@@ -27,28 +27,43 @@
 import datamonkey.dm as dm
 import simplejson as json
 
-def upload_file(fn, distance_threshold, min_overlap, ambiguity_handling):
+def start(fn, distance_threshold, min_overlap, ambiguity_handling, mail=''):
     u""" Starts a new analysis for the given file. """
 
     # We need to have an option of whether they want mail
     # and/or want the call to block until finished, or neither
-    method = "/hivcluster"
-    fh = {"files":(fn, open(fn,'rb'))}
+    method = '/hivcluster'
+    fh = {'files' : (fn, open(fn,'rb'))}
 
     params = {
         'files'              : fh,
         'distance_threshold' : distance_threshold,
         'min_overlap'        : min_overlap,
-        'ambiguity_handling' : ambiguity_handling
+        'ambiguity_handling' : ambiguity_handling,
+        'mail'               : mail
     }
 
     json = dm.post(method, params)
     return HivCluster(json)
 
 
+def get(id):
+    u"""Get preexisting id"""
+    method = '/hivcluster/' + id
+    json = dm.get(method)
+    return HivCluster(json)
+
 #We need to define datatypes and gencodes in the database
 class HivCluster:
     def __init__(self, hivcluster):
-        u""" Initializes Multiple Sequence Alignment """
-        self.id         = hivcluster.get('upload_id')
+        u""" Initializes HivCluster Object """
+        self.id = hivcluster.get('_id')
+        self.status = hivcluster.get('status')
+        self.min_overlap = hivcluster.get('min_overlap')
+        self.ambiguity_handling = hivcluster.get('ambiguity_handling')
+        self.created = hivcluster.get('created')
+        self.distance_threshold = hivcluster.get('distance_threshold')
+        self.distance_threshold = hivcluster.get('distance_threshold')
+        self.graph_dot = hivcluster.get('graph_dot')
+        self.cluster_csv = hivcluster.get('cluster_csv')
 

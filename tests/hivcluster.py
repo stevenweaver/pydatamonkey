@@ -36,47 +36,26 @@ class TestHivCluster(unittest.TestCase):
 
     def setUp(self):
         self.fn   = './res/INPUT.FASTA'
-
-    # app.post('/msa', msa.uploadMsa);
-    def test_upload(self):
-
-        self.distance_threshold = .015
-        self.min_overlap        = 500
+        self.distance_threshold = ".015"
+        self.min_overlap        = "500"
         self.ambiguity_handling = "AVERAGE"
-        self.created_hivcluster = hivcluster.upload_file(self.fn,
+        self.created_hivcluster = hivcluster.start(self.fn,
                                     self.distance_threshold,
                                     self.min_overlap, self.ambiguity_handling)
 
+
+    def test_upload(self):
         self.assertTrue(self.created_hivcluster.id is not None)
-        #self.assertEqual(self.created_msa.datatype, self.datatype)
-        #self.assertEqual(self.created_msa.mailaddr, self.mail)
-        #self.assertEqual(self.created_msa.sequences, 6)
-        #self.assertEqual(self.created_msa.sites, 875)
-        #self.assertEqual(self.created_msa.gencodeid, self.gencodeid)
+        #self.assertEqual(self.created_hivcluster.distance_threshold, self.distance_threshold)
+        self.assertEqual(self.created_hivcluster.min_overlap, int(self.min_overlap))
+        self.assertEqual(self.created_hivcluster.ambiguity_handling, self.ambiguity_handling)
 
-    ## app.get('/msa/:id', msa.findById);
-    #def test_findbyid(self):
-    #    msa_obj = msa.get_by_id(self.created_msa.id)
-    #    self.assertEqual(msa_obj.id, self.created_msa.id)
-    #    self.assertEqual(msa_obj.datatype, self.created_msa.datatype)
-    #    self.assertEqual(msa_obj.mailaddr, self.created_msa.mailaddr)
-    #    self.assertEqual(msa_obj.sequences, self.created_msa.sequences)
-    #    self.assertEqual(msa_obj.sites, self.created_msa.sites)
-    #    self.assertEqual(msa_obj.gencodeid, self.created_msa.gencodeid)
-
-    ## app.put('/msa/:id', msa.updateMsa);
-    #def test_update(self):
-    #    self.created_msa.partitions = 15
-    #    msa_obj = msa.update(vars(self.created_msa))
-    #    self.assertEqual(msa_obj.partitions, 15)
-
-    ## app.delete('/msa/:id', msa.deleteMsa);
-    #def test_delete(self):
-    #    success = msa.delete(self.created_msa.id)
-    #    self.assertEqual(success["success"], 1)
-    #    self.assertRaises(requests.exceptions.HTTPError, msa.get_by_id,
-    #                      self.created_msa.id)
-
+    def test_findbyid(self):
+        hivcluster_obj = hivcluster.get(self.created_hivcluster.id)
+        self.assertEqual(hivcluster_obj.id, self.created_hivcluster.id)
+        self.assertEqual(hivcluster_obj.distance_threshold, self.created_hivcluster.distance_threshold)
+        self.assertEqual(hivcluster_obj.min_overlap, self.created_hivcluster.min_overlap)
+        self.assertEqual(hivcluster_obj.ambiguity_handling, self.created_hivcluster.ambiguity_handling)
 
 if __name__ == '__main__':
     unittest.main()

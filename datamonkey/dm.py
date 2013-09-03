@@ -28,7 +28,7 @@ import urllib
 import requests
 
 #TODO: Change prints to logger
-URL='http://datamonkey-dev:3000'
+URL='http://api-datamonkey-dev:3000'
 
 #A Generic API POST call
 def post(method, params={}):
@@ -40,7 +40,6 @@ def post(method, params={}):
     else:
         r = requests.post(url, params)
     if r.status_code != 200:
-      print r.text
       r.raise_for_status()
     return json.loads(r.text) if r.text else None
 
@@ -48,7 +47,6 @@ def get(method, params={}):
     url = URL + method
     r = requests.get(url, data=params)
     if r.status_code != 200:
-      print r.text
       r.raise_for_status()
     return json.loads(r.text) if r.text else None
 
@@ -56,7 +54,6 @@ def put(method, params={}):
     url = URL + method
     r = requests.put(url, data=params)
     if r.status_code != 200:
-      print r.text
       r.raise_for_status()
     return json.loads(r.text) if r.text else None
 
@@ -64,7 +61,6 @@ def delete(method, params={}):
     url = URL + method
     r = requests.delete(url, data=params)
     if r.status_code != 200:
-      print r.text
       r.raise_for_status()
     return json.loads(r.text) if r.text else None
 
